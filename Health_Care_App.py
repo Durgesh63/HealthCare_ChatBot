@@ -43,16 +43,16 @@ class ChatApplication:
 
     # ask for how many days 
     def _suffering_days(self):
-        no_of_days = askstring(f"Please respond only in days [1,2,3 ....]", f"You suffering from how many days ? ")
+        no_of_days = askstring(f"Please only respond in a number of days.", f"Since how many days do you suffer? ")
         if no_of_days is None:
-            self.msg_warning(f"Wrong Input ","Please respond only in [1,2,3,....] format.Do not cancel because it's important.")
+            self.msg_warning(f"Wrong Input ","Please respond only in number format. Do not cancel because it's important.")
             self._suffering_days()
         elif no_of_days.isnumeric() is True and int(no_of_days) > 0:
-            self.giveanswer("You suffering from how many days ? ",no_of_days)
+            self.giveanswer("Since how many days do you suffer? ",no_of_days)
             # print(type(no_of_days))
             self.days += int(no_of_days)
         else:
-            self.msg_warning(f"Wrong Input ","Please respond only in [1,2,3,....] format.Do not cancel because it's important.")
+            self.msg_warning(f"Wrong Input ","Please respond only in number format. Do not cancel because it's important.")
             self._suffering_days()
 
 
@@ -255,17 +255,10 @@ class ChatApplication:
         self.search.configure(state=DISABLED)
 
     def coming_msg(self):
-
-        self.text_widget.tag_config('red', foreground="red")
         good_name  = self.name_entry.get().split(" ")[0]
-        msg2 = f"Hey! {good_name} , Are you not feeling well? Please tell me what symptoms you are suffering from. \n\n"
-        msg1 = f"bot : "
-        self.text_widget.configure(state=NORMAL)
-        self.text_widget.insert(END, msg1.capitalize(),"red")
-        self.text_widget.insert(END, msg2.capitalize())
-        self.text_widget.configure(state=DISABLED)
-        self.text_widget.see(END)
-        
+        msg = f"Hey! {good_name} , Are you not feeling well? Please tell me what symptoms here are some examples:\n --> fever\n --> cold\n --> cough\n --> headache\n --> stomach_pain\n --> abdominal_pain\n --> dehydration\n --> swelling\n --> acidity\n --> itching\n --> sneezing\n --> vomiting\n --> anxiety , etc \n Note: Please use underscore (  _  ) in place of spacing in the name of disease.\n\n"
+        # msg = f"Hey! {good_name} ,Are you not feeling well? Please tell me what symptoms here are some examples: \n fever , cold , cough , headache , stomach_pain , abdominal_pain , dehydration , swelling , acidity , \n itching , sneezing , vomiting , anxiety , etc.\nNote: Please use underscore( _ ) in place of spacing in the name of disease.\n\n"
+        self._bot_insert(msg)
 
     def _on_enter_pressed(self, event):
         msg = self.msg_entry.get()
@@ -323,22 +316,22 @@ class ChatApplication:
 
                 # no of days 
                 if self.days > 10:
-                    self._bot_insert("Reach to the nearest hospital and take this medicines \n")
+                    self._bot_insert("Stop taking the medicine and reach out to the nearest hospital. \n")
 
                 # get answer 
                 final_dieses = get_pridected_value(self.outputs)
                 try:
                     diesese_is =  get_diesese_practions(final_dieses)
                 except:
-                    diesese_is = f"Sorry no diese get {final_dieses}"
+                    diesese_is = f"Sorry no diese get {final_dieses} \n"
                 self._bot_insert(diesese_is)
 
                 # open webbrowser
                 if self.days > 10:
-                    ask_to_web = tkinter.messagebox.askokcancel("Permition to open Google Map", "Do you want to open Google Map in Your Default Browser \n ")
+                    ask_to_web = tkinter.messagebox.askokcancel("Permission to open Google Maps", "Do you want to launch Google Maps in your regular browser?\n ")
                     if ask_to_web is True:
                         webbrowser.open_new_tab('https://www.google.com/maps/search/hospital+near+me/')
-                        self._bot_insert("\n opening Google Map \n")
+                        self._bot_insert(" Open Google Maps on your default web browser \n")
             else:
                 pass
             # print(final_dieses)
@@ -351,6 +344,7 @@ class ChatApplication:
         self.text_widget.delete(1.0, END)
         self.text_widget.delete(1.0, END)
         self.text_widget.config(state=DISABLED)
+        self.coming_msg()
 
     def _user_instet_msg(self,usr,msg):
         self.text_widget.tag_config('blue', foreground="#FDD20E")

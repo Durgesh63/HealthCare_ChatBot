@@ -18,18 +18,24 @@ import torch
 
 import random
 
+# from transformers import pipeline
+# PRETRAINED = "raynardj/ner-disease-ncbi-bionlp-bc5cdr-pubmed"
+# ners = pipeline(task="ner",model=PRETRAINED, tokenizer=PRETRAINED)
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 # remove warning 
+import warnings
 def warn(*args, **kwargs):
     pass
-import warnings
 warnings.warn = warn
 
 # load model
-dtc , le  = pk.load(open('/home/durgesh-dev/Desktop/Final Year Projects/Chatbotprojectpre/chatbot_modelsave', 'rb'))
-model,second_le  = pk.load(open('/home/durgesh-dev/Desktop/Final Year Projects/Chatbotprojectpre/chatbot_model', 'rb'))
+dtc , le  = pk.load(open('/home/durgesh-dev/Desktop/Final Year Projects/chatbot/HealthCare_ChatBot/chatbot_modelsave','rb'))
+model,second_le  = pk.load(open('/home/durgesh-dev/Desktop/Final Year Projects/chatbot/HealthCare_ChatBot/chatbot_model','rb'))
+
+ners = pk.load(open('/home/durgesh-dev/Desktop/Final Year Projects/chatbot/HealthCare_ChatBot/newsave_model','rb'))
 
 # initlising varible 
 
@@ -97,7 +103,7 @@ def bag_of_words(tokenize_sentence , all_words):
 
 
 
-FILE = "/home/durgesh-dev/Desktop/Final Year Projects/Chatbotprojectpre/data.pth"
+FILE = "/home/durgesh-dev/Desktop/Final Year Projects/chatbot/HealthCare_ChatBot/data.pth"
 data = torch.load(FILE)
 
 
@@ -223,34 +229,63 @@ def check_pattern(dis_list,inp):
     import re
     pred_list=[]
     ptr=0
-    patt = "^" + inp + "$"
-    regexp = re.compile(inp)
-    for item in dis_list:
+    
+    #input hugging face word
+    try:
+        des_word = []
+        if len(des_word) > 1:
+            des_word.clear()
 
+        # print("try")
+        new_models = ners(f"i am suffering from {inp}" , aggregation_strategy="first")
+        for result in new_models:
+            # print(result)
+            # print(int(float(result['score'])*100))
+            if result['entity_group'] == "Disease" and int(float(result['score'])*100) >= 65 :
+                    des_word.append(result['word'].replace(" ", ""))
+   
+        # print(des_word)
+        #regex update
+        regexp = re.compile(des_word[0])
+    except:
+        # print("============================= except")
+        des_word = []
+        if len(des_word) > 1:
+            des_word.clear()
+        
+        des_word.append(inp)
+        try:       
+            regexp = re.compile(des_word[0])
+        except:
+            des_word.append("joint pain")
+            regexp = re.compile(des_word[0])
+
+    for item in dis_list:
         if regexp.search(item):
             pred_list.append(item)
     if(len(pred_list)>0):
        # if match found then 
-        return 1,pred_list
+        return 1,pred_list,des_word[0]
     else:
         # if match not found or only one same type of item present
-        return ptr,item
+        return ptr,item,des_word[0]
 
 
 
 # step 1 
 def tree_to_code(disease_input):
-    conf,cnf_dis=check_pattern(feature_names,disease_input)
+    conf,cnf_dis,desies=check_pattern(feature_names,disease_input)
     if conf==1:
         # print(len(cnf_dis))
         if len(cnf_dis) > 1:
-            output = f"Are you suffering from which type of ' {disease_input} ' ? Please confirm that: \n"
+            output = f"Are you suffering from which type of ' {desies} ' ? Please confirm that: \n"
             for num,it in enumerate(cnf_dis):
-                output += f"\t {num+1} ) {it} \n"
+                output += f"\t --> {it} \n"
+            output += f"\t Note: Please use underscore (  _  ) in place of spacing in the name of disease.\n"
             return [output]
 
         else :
-            output = f"You are suffering from {cnf_dis[0]}  \n"
+            output = f"You are suffering from {desies}  \n"
             return_input_disease.clear()
             return_input_disease.append(disease_input) 
 
