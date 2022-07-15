@@ -21,4 +21,3 @@ class Searching:
 
 model = Searching(File_diesies_desc.diesis_desc,File_symptom_precaution.diesis_prec)
 
-# print(diesies_desc.desc_data())

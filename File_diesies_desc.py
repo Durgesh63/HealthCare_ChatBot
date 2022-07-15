@@ -39,8 +39,3 @@ diesis_desc = {'(vertigo) paroymsal  positional vertigo': "Benign paroxysmal pos
  'Urinary tract infection': 'Urinary tract infection: An infection of the kidney, ureter, bladder, or urethra. Abbreviated UTI. Not everyone with a UTI has symptoms, but common symptoms include a frequent urge to urinate and pain or burning when urinating.',
  'Varicose veins': 'A vein that has enlarged and twisted, often appearing as a bulging, blue blood vessel that is clearly visible through the skin. Varicose veins are most common in older adults, particularly women, and occur especially on the legs.',
  'Hepatitis a': "Hepatitis A is a highly contagious liver infection caused by the hepatitis A virus. The virus is one of several types of hepatitis viruses that cause inflammation and affect your liver's ability to function."}
-
-# def getDescription(diesies):
-#     print(diesis_desc[diesies.capitalize()])
-
-# getDescription("(vertigo) Paroymsal  Positional Vertigo")
