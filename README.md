@@ -6,7 +6,7 @@ This is a Python-based project for dealing with human symptoms and predicting th
 The primary goal of this project is to forecast the disease so that patients can get the desired output according to their primary symptoms.
 
 ## Technology used
-We used **[TKinter](https://docs.python.org/3/library/tkinter.html)** to create a desktop-based application and **[Spacy](https://spacy.io/)** for NLP-based processes like ***text sentence tokinzation and lemtitazation***, and we used a **[Huggingface](https://huggingface.co/)** pretrained model to extrat disease names from a given sentence ***( or ner processing)***.
+We used **[TKinter](https://docs.python.org/3/library/tkinter.html)** to create a desktop-based application and **[Spacy](https://spacy.io/)** for NLP-based processes like ***text sentence tokenization and lemmatization***, and we used a **[Huggingface](https://huggingface.co/)** pretrained model to extrat disease names from a given sentence ***( or ner processing)***.
 
 #### Huggingface
 Downloading pre-trained model from [Huggingface Model](https://huggingface.co/raynardj/ner-disease-ncbi-bionlp-bc5cdr-pubmed)
