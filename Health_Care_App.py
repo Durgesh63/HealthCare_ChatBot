@@ -232,15 +232,15 @@ class ChatApplication:
                 msg1 += f"{i+1})  {pred_list[i]} \n"
         else:
             msg1 = "Ohh!! There were no similar diseases discovered."
-        self.search.configure(state=NORMAL)
-        self.search.delete("1.0",END)
-        self.search.insert(END, msg1)
-        self.search.configure(state=DISABLED)
+        self.search_box.configure(state=NORMAL)
+        self.search_box.delete("1.0",END)
+        self.search_box.insert(END, msg1)
+        self.search_box.configure(state=DISABLED)
 
     # bot First welcome Message 
     def coming_msg(self):
         good_name  = self.name_entry.get().split(" ")[0]
-        msg = f"Hey! {good_name} , Are you not feeling well? Please tell me what symptoms here are some examples:\n --> fever\n --> cold\n --> cough\n --> headache\n --> stomach_pain\n --> abdominal_pain\n --> dehydration\n --> swelling\n --> acidity\n --> itching\n --> sneezing\n --> vomiting\n --> anxiety , etc \n Note: Please use underscore (  _  ) in place of spacing in the name of disease.\n\n"
+        msg = f"Hey! {good_name} , Are you not feeling well? Please tell me what symptoms here are some examples:\n --> fever\n --> cold\n --> cough\n --> headache\n --> stomach_pain\n --> abdominal_pain\n --> dehydration\n --> swelling\n --> acidity\n --> internal_itching\n --> sneezing\n --> vomiting\n --> anxiety , etc \n Note: Please use underscore (  _  ) in place of spacing in the name of disease.\n\n"
         # msg = f"Hey! {good_name} ,Are you not feeling well? Please tell me what symptoms here are some examples: \n fever , cold , cough , headache , stomach_pain , abdominal_pain , dehydration , swelling , acidity , \n itching , sneezing , vomiting , anxiety , etc.\nNote: Please use underscore( _ ) in place of spacing in the name of disease.\n\n"
         self._bot_insert(msg)
 
