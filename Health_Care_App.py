@@ -70,7 +70,7 @@ class ChatApplication:
     # -------------------------------------------End of ask question -----------------------------------------------
 
 
-    # ====================================================  END OF TKINTER FIRST WINDOW =====================================================
+    # ====================================================  START OF TKINTER FIRST WINDOW =====================================================
     #First tkinter window open and asking the name of user
     def _get_name(self):
         self.window.title("Welcome to Health Care Chatbot")
@@ -116,8 +116,8 @@ class ChatApplication:
         # About menu 
         about = Menu(menu, tearoff=0,font="bold",activebackground="#FFFFFF")
         menu.add_cascade(label="About", menu=about,font="bold")
-        about.add_command(label="Develpoers", command=lambda: self.msg_showinfo(f"Bot Develpoers ",f"Project Mentor - Mr.Prashant Kumar Yadav \n\n Group number - 01 \n\n Group Member \n\n 1. Durgesh Maurya (105501) \n 2. Dimpla (185506) \n 3. Dev Sharan Yadav (185532) \n"),font="bold")
-        about.add_command(label="About Bot", command=lambda: self.msg_showinfo(f"Bot V1.0.0 ",f" \tAbout Bot \n\n This is a bot which is used to predict similar diseases using a machine learning model and give the diseases information and their prevention.\n\n Project Download Link \n\n  https://github.com/Durgesh63/Chatbot-healthcare-test.git"),font="bold")
+        about.add_command(label="Develpoers", command=lambda: self.msg_showinfo(f"Bot Develpoers ",f"Project Mentor - Mr.Prashant Kumar Yadav \n\nGroup number - 01 \n\nGroup Members \n\n1. Durgesh Maurya (105501) \n2. Dimpla (185506) \n3. Dev Sharan Yadav (185532) \n"),font="bold")
+        about.add_command(label="About Project", command=lambda: self.msg_showinfo(f"Bot V1.0.0 ",f" \tAbout Project \n\nThe primary goal of this project is to forecast the disease so that patients can get the desired output according to their primary symptoms.\n\n GitHub Link \n\nhttps://github.com/Durgesh63/HealthCare_ChatBot.git"),font="bold")
 
         # Quit menu 
         menu.add_command(label ='Quit!',font="bold", command=lambda: self.msg_msg_askcancle(f"Ok Quit "," Are You sure? "))
@@ -203,7 +203,7 @@ class ChatApplication:
         bottom_label.place(relwidth=1,relheight=.1,x=1, y=563.7 )
         
         # message entry box #2C3E50
-        self.msg_entry = Entry(bottom_label, bg="#1161A8", fg=TEXT_COLOR, font=FONT)
+        self.msg_entry = Entry(bottom_label, bg=BG_GRAY, fg="Black", font=FONT)
         self.msg_entry.place(relheight=0.85,relwidth=0.82,x=5, y=4)
         self.msg_entry.focus()
         self.msg_entry.bind("<Return>", self._on_enter_pressed)
