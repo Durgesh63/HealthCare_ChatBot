@@ -8,6 +8,11 @@ The primary goal of this project is to forecast the disease so that patients c
 ## Technology used
 We used **[TKinter](https://docs.python.org/3/library/tkinter.html)** to create a desktop-based application and **[Spacy](https://spacy.io/)** for NLP-based processes like ***text sentence tokenization and lemmatization***, and we used a **[Huggingface](https://huggingface.co/)** pretrained model to extrat disease names from a given sentence ***( or ner processing)***.
 
+## Team Members
+1. Durgesh Maurya
+2. Dimpal
+3. Dev shran Yadav
+
 #### Huggingface
 Downloading pre-trained model from [Huggingface Model](https://huggingface.co/raynardj/ner-disease-ncbi-bionlp-bc5cdr-pubmed)
 ```python
