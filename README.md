@@ -5,6 +5,11 @@ This is a Python-based project for dealing with human symptoms and predicting th
 #### Project Goal
 The primary goal of this project is to forecast the disease so that patients can get the desired output according to their primary symptoms.
 
+## Team Members
+1. Durgesh Maurya
+2. Dimpal
+3. Dev shran Yadav 
+ 
 ## Technology used
 We used **[TKinter](https://docs.python.org/3/library/tkinter.html)** to create a desktop-based application and **[Spacy](https://spacy.io/)** for NLP-based processes like ***text sentence tokenization and lemmatization***, and we used a **[Huggingface](https://huggingface.co/)** pretrained model to extrat disease names from a given sentence ***( or ner processing)***.
 
